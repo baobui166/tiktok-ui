@@ -24,8 +24,11 @@
     align-items: center;
 }
 
-.search {
+.search,
+.search-result {
     width: 361px;
+}
+.search {
     height: 46px;
     background: rgba(22, 24, 35, 0.06);
     border-radius: var(--search-border-radius);
@@ -64,6 +67,10 @@
     }
 }
 
+.search-result {
+    padding-top: 8px;
+}
+
 .clear-btn,
 .loading {
     position: absolute;
@@ -95,4 +102,12 @@
     &:active {
         background: rgb(22, 24, 35, 0.1);
     }
+}
+
+.search-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(22, 24, 35, 0.5);
+    padding: 5px 12px;
 }
