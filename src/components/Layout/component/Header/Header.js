@@ -23,11 +23,13 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Tippy from '@tippyjs/react';
 import HeadLessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import AccountItem from '~/components/AccountItem';
 
 import Button from '~/components/Button/Button';
 import Menu from '~/components/Popper/Menu/Menu';
+import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image/Image';
 
 const cs = className.bind(styles);
 
@@ -89,6 +91,7 @@ const userMenu = [
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
     const currentUser = true;
+    const imageRef = useRef();
 
     useEffect(() => {
         setTimeout(() => {
@@ -133,7 +136,7 @@ function Header() {
                         {/* <FontAwesomeIcon className={cs('loading')} icon={faSpinner}></FontAwesomeIcon> */}
 
                         <button className={cs('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadLessTippy>
@@ -142,13 +145,19 @@ function Header() {
                         <>
                             <Tippy delay={[0, 200]} content={'Upload'}>
                                 <button className={cs('action-btn')}>
-                                    <FontAwesomeIcon icon={faUpload} />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
 
                             <Tippy delay={[0, 200]} content={'Message'}>
                                 <button className={cs('action-btn')}>
-                                    <FontAwesomeIcon icon={faMessage} />
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+
+                            <Tippy delay={[0, 200]} content={'Inbox'}>
+                                <button className={cs('action-btn')}>
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -163,7 +172,8 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENUS_ITEM} onChange={handleMenu}>
                         {currentUser ? (
-                            <img
+                            <Image
+                                ref={imageRef}
                                 src="https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/anh-dai-dien-tet-18.jpg"
                                 className={cs('user-avatar')}
                                 alt="hinh anh"
