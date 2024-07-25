@@ -10,6 +10,8 @@ import 'tippy.js/dist/tippy.css';
 import { useEffect, useRef, useState } from 'react';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
+import { useDebounce } from '~/hooks';
+import * as searchServer from '~/apiServer/searchServer';
 
 const cs = className.bind(styles);
 function Search() {
@@ -18,6 +20,8 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
+
+    const debounced = useDebounce(searchValue, 500);
 
     function handleClear() {
         inputRef.current.focus();
@@ -30,19 +34,20 @@ function Search() {
     }
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (debounced === undefined || debounced === null || !debounced.trim()) {
             setSearchResult([]);
             return;
         }
 
-        setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => {
-                setLoading(false);
-                return res.json();
-            })
-            .then((data) => setSearchResult(data.data));
-    }, [searchValue]);
+        const fetch = async () => {
+            setLoading(true);
+            const result = await searchServer.search(debounced);
+            setSearchResult(result);
+            setLoading(false);
+        };
+
+        fetch();
+    }, [debounced]);
 
     return (
         <HeadLessTippy

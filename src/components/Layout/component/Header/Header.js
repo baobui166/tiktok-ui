@@ -1,6 +1,5 @@
 import className from 'classnames/bind';
 import styles from './Header.module.scss';
-import images from '~/assets/images/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faSignIn,
@@ -16,7 +15,7 @@ import {
 import Tippy from '@tippyjs/react';
 
 import 'tippy.js/dist/tippy.css';
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 
 import Button from '~/components/Button/Button';
 import Menu from '~/components/Popper/Menu/Menu';
