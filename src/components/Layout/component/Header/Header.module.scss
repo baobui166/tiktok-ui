@@ -1,8 +1,11 @@
-.wrapper {
+:root {
     --search-border-radius: 92px;
     --search-height: 46px;
     --search-top-spacer: 9px;
     --search-bottom: 52px;
+}
+
+.wrapper {
     height: var(--default-layout-header-height);
     box-shadow: 0 1px 1px rgb(0 0 0 / 12%);
     display: flex;
@@ -23,94 +26,6 @@
 .logo {
     display: flex;
     align-items: center;
-}
-
-.search,
-.search-result {
-    width: 361px;
-}
-.search {
-    height: 46px;
-    background: rgba(22, 24, 35, 0.06);
-    border-radius: var(--search-border-radius);
-    padding-left: 16px;
-    display: flex;
-    position: relative;
-    border: 1.5px solid transparent;
-
-    input {
-        flex: 1;
-        color: var(--black);
-        font-size: 16px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        padding: 12px 0;
-        caret-color: red;
-    }
-
-    input:not(:placeholder-shown) ~ .search-btn {
-        color: rgb(22, 24, 35, 0.75);
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: var(--search-top-spacer);
-        right: var(--search-bottom);
-        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-        width: 1px;
-        background: rgb(22, 24, 35, 0.12);
-    }
-
-    &:focus-within {
-        border-color: rgb(22, 24, 35, 0.2);
-    }
-}
-
-.search-result {
-    padding-top: 8px;
-}
-
-.clear-btn,
-.loading {
-    position: absolute;
-    right: var(--search-bottom);
-    top: 25px;
-    transform: translateY(-50%);
-    border: none;
-    outline: none;
-}
-
-.loading {
-}
-
-.search-btn {
-    width: var(--search-bottom);
-    height: 100%;
-    border: none;
-    outline: none;
-    border-top-right-radius: var(--search-border-radius);
-    border-bottom-right-radius: var(--search-border-radius);
-    font-size: 1.1rem;
-    color: rgb(22, 24, 35, 0.3);
-
-    &:hover {
-        cursor: pointer;
-        background: rgb(22, 24, 35, 0.03);
-    }
-
-    &:active {
-        background: rgb(22, 24, 35, 0.1);
-    }
-}
-
-.search-title {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(22, 24, 35, 0.5);
-    padding: 5px 12px;
 }
 
 //actions

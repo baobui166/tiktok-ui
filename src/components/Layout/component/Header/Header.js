@@ -3,33 +3,26 @@ import styles from './Header.module.scss';
 import images from '~/assets/images/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
     faSignIn,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faUpload,
-    faMessage,
     faUser,
     faGear,
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-
 import Tippy from '@tippyjs/react';
-import HeadLessTippy from '@tippyjs/react/headless';
+
 import 'tippy.js/dist/tippy.css';
 import { useEffect, useState, useRef } from 'react';
-import AccountItem from '~/components/AccountItem';
 
 import Button from '~/components/Button/Button';
 import Menu from '~/components/Popper/Menu/Menu';
-import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Icons';
+import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image/Image';
+import Search from '../Search/Search';
 
 const cs = className.bind(styles);
 
@@ -89,15 +82,8 @@ const userMenu = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
     const currentUser = true;
     const imageRef = useRef();
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 1000);
-    });
 
     // handle logic
     function handleMenu(menuItem) {
@@ -111,35 +97,12 @@ function Header() {
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/640px-TikTok_logo.svg.png"
                         alt="tiktok"
-                        style={{ width: '118px', height: '42px', objectFit: 'contain    ' }}
+                        style={{ width: '118px', height: '42px', objectFit: 'contain' }}
                     />
                 </div>
-                <HeadLessTippy
-                    visible={searchResult.length > 0}
-                    interactive={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cs('search-result')} tabIndex={-1} {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cs('search-title')}>Account </h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cs('search')}>
-                        <input placeholder="Searchs account and videos" />
-                        <button className={cs('clear-btn')}>
-                            <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-                        </button>
-                        {/* <FontAwesomeIcon className={cs('loading')} icon={faSpinner}></FontAwesomeIcon> */}
 
-                        <button className={cs('search-btn')}>
-                            <SearchIcon />
-                        </button>
-                    </div>
-                </HeadLessTippy>
+                <Search />
+
                 <div className={cs('actions')}>
                     {currentUser ? (
                         <>
