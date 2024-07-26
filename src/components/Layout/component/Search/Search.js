@@ -33,6 +33,14 @@ function Search() {
         setShowResult(false);
     }
 
+    function handleChange(e) {
+        const searchValue = e.target.value;
+
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(e.target.value);
+        }
+    }
+
     useEffect(() => {
         if (debounced === undefined || debounced === null || !debounced.trim()) {
             setSearchResult([]);
@@ -69,7 +77,7 @@ function Search() {
             <div className={cs('search')}>
                 <input
                     placeholder="Searchs account and videos"
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     spellCheck={false}
                     value={searchValue}
                     ref={inputRef}
@@ -84,7 +92,7 @@ function Search() {
 
                 {loading && <FontAwesomeIcon className={cs('loading')} icon={faSpinner}></FontAwesomeIcon>}
 
-                <button className={cs('search-btn')}>
+                <button className={cs('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                     <SearchIcon />
                 </button>
             </div>

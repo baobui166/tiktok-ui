@@ -22,6 +22,8 @@ import Menu from '~/components/Popper/Menu/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image/Image';
 import Search from '../Search/Search';
+import { Link } from 'react-router-dom';
+import routesConfig from '~/config/routes';
 
 const cs = className.bind(styles);
 
@@ -92,13 +94,15 @@ function Header() {
     return (
         <header className={cs('wrapper')}>
             <div className={cs('inner')}>
-                <div className={cs('logo')}>
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/640px-TikTok_logo.svg.png"
-                        alt="tiktok"
-                        style={{ width: '118px', height: '42px', objectFit: 'contain' }}
-                    />
-                </div>
+                <Link to={routesConfig.home}>
+                    <div className={cs('logo')}>
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/640px-TikTok_logo.svg.png"
+                            alt="tiktok"
+                            style={{ width: '118px', height: '42px', objectFit: 'contain' }}
+                        />
+                    </div>
+                </Link>
 
                 <Search />
 
