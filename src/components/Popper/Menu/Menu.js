@@ -1,5 +1,6 @@
 import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+import PropTypes from 'prop-types';
 
 import MenuItem from './MenuItem';
 import Header from './Header';
@@ -31,34 +32,44 @@ function Menu({ children, items = [], onChange = defaultFN, hideOnClick = false 
     };
 
     return (
-        <Tippy
-            hideOnClick={hideOnClick}
-            interactive
-            delay={[0, 500]}
-            offset={[16, 8]}
-            placement="bottom-end"
-            render={(attrs) => (
-                <div className={cs('menu-list')} tabIndex={-1} {...attrs}>
-                    <PopperWrapper className={cs('menu-popper')}>
-                        {history.length > 1 && (
-                            <Header
-                                title={'Languege'}
-                                onBack={() => {
-                                    setHistory((pre) => pre.slice(0, pre.length - 1));
-                                }}
-                            />
-                        )}
-                        {renderItem()}
-                    </PopperWrapper>
-                </div>
-            )}
-            onHidden={() => {
-                return setHistory((pre) => pre.slice(0, 1));
-            }}
-        >
-            {children}
-        </Tippy>
+        // using div or span for remove warming in console
+        <div>
+            <Tippy
+                hideOnClick={hideOnClick}
+                interactive
+                delay={[0, 500]}
+                offset={[16, 8]}
+                placement="bottom-end"
+                render={(attrs) => (
+                    <div className={cs('menu-list')} tabIndex={-1} {...attrs}>
+                        <PopperWrapper className={cs('menu-popper')}>
+                            {history.length > 1 && (
+                                <Header
+                                    title={current.title}
+                                    onBack={() => {
+                                        setHistory((pre) => pre.slice(0, pre.length - 1));
+                                    }}
+                                />
+                            )}
+                            <div className={cs('menu-body')}>{renderItem()}</div>
+                        </PopperWrapper>
+                    </div>
+                )}
+                onHidden={() => {
+                    return setHistory((pre) => pre.slice(0, 1));
+                }}
+            >
+                {children}
+            </Tippy>
+        </div>
     );
 }
+
+Menu.protoTypes = {
+    children: PropTypes.node.isRequired,
+    items: PropTypes.array,
+    onChange: PropTypes.func,
+    hideOnClick: PropTypes.bool,
+};
 
 export default Menu;

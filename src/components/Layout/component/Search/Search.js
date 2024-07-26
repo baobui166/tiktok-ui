@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
-import * as searchServer from '~/apiServer/searchServer';
+import * as searchServer from '~/servers/searchServer';
 
 const cs = className.bind(styles);
 function Search() {

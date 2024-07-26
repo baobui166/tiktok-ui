@@ -7,11 +7,16 @@
 
 .wrapper {
     height: var(--default-layout-header-height);
+    width: 100%;
     box-shadow: 0 1px 1px rgb(0 0 0 / 12%);
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
 }
 
 .inner {

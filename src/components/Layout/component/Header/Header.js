@@ -23,7 +23,7 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image/Image';
 import Search from '../Search/Search';
 import { Link } from 'react-router-dom';
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 const cs = className.bind(styles);
 
@@ -36,6 +36,7 @@ const MENUS_ITEM = [
             data: [
                 { code: 'en', title: 'English' },
                 { code: 'vn', title: 'Tiếng Việt' },
+                { code: 'en', title: 'English' },
             ],
         },
     },
@@ -94,7 +95,7 @@ function Header() {
     return (
         <header className={cs('wrapper')}>
             <div className={cs('inner')}>
-                <Link to={routesConfig.home}>
+                <Link to={config.routes.home}>
                     <div className={cs('logo')}>
                         <img
                             src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/640px-TikTok_logo.svg.png"
