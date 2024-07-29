@@ -31,6 +31,13 @@ function Menu({ children, items = [], onChange = defaultFN, hideOnClick = false 
         });
     };
 
+    function handleResteToFirstPage() {
+        setHistory((pre) => pre.slice(0, 1));
+    }
+
+    function handleBack() {
+        setHistory((pre) => pre.slice(0, pre.length - 1));
+    }
     return (
         // using div or span for remove warming in console
         <div>
@@ -43,20 +50,13 @@ function Menu({ children, items = [], onChange = defaultFN, hideOnClick = false 
                 render={(attrs) => (
                     <div className={cs('menu-list')} tabIndex={-1} {...attrs}>
                         <PopperWrapper className={cs('menu-popper')}>
-                            {history.length > 1 && (
-                                <Header
-                                    title={current.title}
-                                    onBack={() => {
-                                        setHistory((pre) => pre.slice(0, pre.length - 1));
-                                    }}
-                                />
-                            )}
+                            {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
                             <div className={cs('menu-body')}>{renderItem()}</div>
                         </PopperWrapper>
                     </div>
                 )}
                 onHidden={() => {
-                    return setHistory((pre) => pre.slice(0, 1));
+                    return setHistory(handleResteToFirstPage);
                 }}
             >
                 {children}

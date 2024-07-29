@@ -8,7 +8,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import HeadLessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { useEffect, useRef, useState } from 'react';
-import AccountItem from '~/components/AccountItem';
+import AccountItem from '~/components/AccountItem/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 import * as searchServer from '~/servers/searchServer';
@@ -17,11 +17,11 @@ const cs = className.bind(styles);
 function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     function handleClear() {
         inputRef.current.focus();
@@ -42,20 +42,20 @@ function Search() {
     }
 
     useEffect(() => {
-        if (debounced === undefined || debounced === null || !debounced.trim()) {
+        if (debouncedValue === undefined || debouncedValue === null || !debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
 
         const fetch = async () => {
             setLoading(true);
-            const result = await searchServer.search(debounced);
+            const result = await searchServer.search(debouncedValue);
             setSearchResult(result);
             setLoading(false);
         };
 
         fetch();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     return (
         <HeadLessTippy

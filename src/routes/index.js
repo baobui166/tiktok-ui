@@ -6,6 +6,7 @@ import Profile from '~/pages/Profile/Profile';
 import Upload from '~/pages/Upload/Upload';
 import Search from '~/pages/Search/Search';
 import routesConfig from '~/config/routes';
+import Live from '~/pages/Live';
 
 // khong can dang nhap
 const publicRouter = [
@@ -14,6 +15,7 @@ const publicRouter = [
     { path: routesConfig.profile, component: Profile },
     { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
     { path: routesConfig.search, component: Search, layout: null },
+    { path: routesConfig.live, component: Live },
 ];
 
 // can dang nhap
